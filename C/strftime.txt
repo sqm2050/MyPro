@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <time.h>
+main()
+{
+struct tm *ptr;
+time_t lt;
+char str[80];
+lt=time(NULL);
+ptr=localtime(&lt);
+strftime(str,sizeof(str),"it is now %Y%m%d",ptr);
+printf("%s\n",str);
+return 0;
+}

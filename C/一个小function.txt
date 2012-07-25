@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+void f1(long year)
+{
+    if (year%100==0)
+        if(year%400==0)
+        printf("%ld是闰年\n",year);
+        else
+        printf("%ld不是闰年\n",year);
+    else
+    if (year%4==0)
+        printf("%ld是闰年\n",year);
+        else
+        printf("%ld不是闰年\n",year);
+}
+main()
+{
+int i;
+for (i=1990;i<=2040;i++)
+f1(i);
+}

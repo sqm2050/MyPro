@@ -1,0 +1,117 @@
+#include <stdio.h>
+#define DATE_MAX 50
+#define BASE 1990
+main()
+{
+int i,j;
+i = 0;
+j = 0;
+struct s_chgdate
+{
+    long    year;           /*年份*/
+    char    send_mon[6];    /*2月最后一天的日期*/
+};
+struct s_chgdate srleapyear[DATE_MAX];
+for (i=0;i<=DATE_MAX;i++)
+{
+    srleapyear[i].year=BASE+i;
+    j=srleapyear[i].year;
+    if (srleapyear[i].year%100==0)
+        if(srleapyear[i].year%400==0)
+        {
+        srleapyear[i].send_mon[0]='\"';
+        srleapyear[i].send_mon[1]='0';
+        srleapyear[i].send_mon[2]='2';
+        srleapyear[i].send_mon[3]='2';
+        srleapyear[i].send_mon[4]='9';
+        srleapyear[i].send_mon[5]='\"';
+        }
+        else
+        {
+        srleapyear[i].send_mon[0]='\"';
+        srleapyear[i].send_mon[1]='0';
+        srleapyear[i].send_mon[2]='2';
+        srleapyear[i].send_mon[3]='2';
+        srleapyear[i].send_mon[4]='8';
+        srleapyear[i].send_mon[5]='\"';
+        }
+    else
+        if (srleapyear[i].year%4==0)
+        {
+        srleapyear[i].send_mon[0]='\"';
+        srleapyear[i].send_mon[1]='0';
+        srleapyear[i].send_mon[2]='2';
+        srleapyear[i].send_mon[3]='2';
+        srleapyear[i].send_mon[4]='9';
+        srleapyear[i].send_mon[5]='\"';
+        }
+        else
+        {
+        srleapyear[i].send_mon[0]='\"';
+        srleapyear[i].send_mon[1]='0';
+        srleapyear[i].send_mon[2]='2';
+        srleapyear[i].send_mon[3]='2';
+        srleapyear[i].send_mon[4]='8';
+        srleapyear[i].send_mon[5]='\"';
+        }
+
+//printf("{%d%s}\n",srleapyear[i].send_mon);
+printf("{%d,",j);
+for (j=0;j<=5;j++)
+printf("%c",srleapyear[i].send_mon[j]);
+printf("}\n");
+}
+}
+-------------------------------------------------------------
+打印结果如下：
+{1990,"0228"}
+{1991,"0228"}
+{1992,"0229"}
+{1993,"0228"}
+{1994,"0228"}
+{1995,"0228"}
+{1996,"0229"}
+{1997,"0228"}
+{1998,"0228"}
+{1999,"0228"}
+{2000,"0229"}
+{2001,"0228"}
+{2002,"0228"}
+{2003,"0228"}
+{2004,"0229"}
+{2005,"0228"}
+{2006,"0228"}
+{2007,"0228"}
+{2008,"0229"}
+{2009,"0228"}
+{2010,"0228"}
+{2011,"0228"}
+{2012,"0229"}
+{2013,"0228"}
+{2014,"0228"}
+{2015,"0228"}
+{2016,"0229"}
+{2017,"0228"}
+{2018,"0228"}
+{2019,"0228"}
+{2020,"0229"}
+{2021,"0228"}
+{2022,"0228"}
+{2023,"0228"}
+{2024,"0229"}
+{2025,"0228"}
+{2026,"0228"}
+{2027,"0228"}
+{2028,"0229"}
+{2029,"0228"}
+{2030,"0228"}
+{2031,"0228"}
+{2032,"0229"}
+{2033,"0228"}
+{2034,"0228"}
+{2035,"0228"}
+{2036,"0229"}
+{2037,"0228"}
+{2038,"0228"}
+{2039,"0228"}
+{2040,"0229"}

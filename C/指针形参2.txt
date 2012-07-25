@@ -1,0 +1,26 @@
+#include <stdio.h>
+void swap(int *a,int *b)
+{
+int t;
+t = *a;
+*a = *b;
+*b = t;
+printf("a=%d,b=%d\n",*a,*b);
+}
+main()
+{
+int x = 1;
+int y = 2;
+int *m;
+int *n;
+m = &x;     /*这里m，n已经被声明为指针类型，直接赋地址就行了。*
+            m(代表寻址-取值，是int型) = &x(取址，取得地址，为int *);报错,
+            warning #2513-D: a value of type "int *" cannot be assigned to an entity of type "int
+            意思是：一个int *类型的值不能被赋给一个int型实体。*/
+n = &y;
+printf("m=%d,n=%d\n",*m,*n);
+printf("x=%d,y=%d\n",x,y);
+swap(m,n);			//这里声明了指向x,y的指针m,n所以函数中不用在加“&”取址。
+printf("m=%d,n=%d\n",*m,*n);
+printf("x=%d,y=%d\n",x,y);
+}

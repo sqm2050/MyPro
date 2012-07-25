@@ -1,0 +1,14 @@
+char   nameStr[16]; 
+#define   BASE_ADDR   0x00800000 
+  
+nameStr[15]   =    '\0 '; 
+memcpy(nameStr,   (void   *)BASE_ADDR,   15); 
+  
+if   (strcmp(nameStr,   nameList)   ==   0) 
+{ 
+       //... 
+} 
+else 
+{ 
+       //... 
+} 

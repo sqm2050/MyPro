@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <time.h>
+#define NAME 1000
+
+
+int date1(char date[])
+{
+struct tm *ptr;
+time_t lt;
+//char date[10];
+lt=time(NULL);
+ptr=localtime(&lt);
+strftime(date,100,"%Y%m%d",ptr);
+//printf("%s\n",date);
+return 0;
+}
+
+main()
+{
+FILE * fp;
+//char *a="c";
+char da[100];
+date1(da);
+fp=fopen(da,"w+");
+//printf("%s\n",&a);
+fprintf(fp,"%d",NAME);
+}

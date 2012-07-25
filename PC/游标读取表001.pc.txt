@@ -1,0 +1,134 @@
+环境：
+测试环境-用sqprod中的表B_PEER_STAT_FLAG做测试
+
+
+源码：
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include <sqlca.h>
+
+int connect();
+void cursor();
+void sql_error();
+char action;
+void main()
+{
+   EXEC SQL WHENEVER SQLERROR DO sql_error();
+    if(connect() == 0)
+    {
+        cursor();
+        EXEC SQL COMMIT RELEASE;                // 提交事务，断开连接
+    }
+    else
+        printf("连接失败\n");
+}
+
+int connect()                   // connect to Oracle database
+{
+    char username[10], password[10], server[20];
+
+    strcpy(username, "stdproddb");
+    strcpy(password, "std1db");
+    strcpy(server, "ITANDB.NET2");
+    EXEC SQL CONNECT :username IDENTIFIED BY :password USING :server;
+
+    if(sqlca.sqlcode == 0)
+        return 0;
+    else
+        return sqlca.sqlcode;
+}
+
+void sql_error()                // print error infomation
+{
+    printf("%.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
+}
+void cursor()                   // 游标操作
+{
+    int b_stat,b_peer;                    // 定义宿主变量
+    char inn[20];
+
+    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select * from t_mng_ext_tranchk;    // 定义游标
+    EXEC SQL OPEN sqm_cursor;   // 打开游标
+    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // 游标数据提取完毕后退出循环
+    for(; ;)
+//  while(1)
+   {
+        printf("\nF/f: 第一行，P/p：前一行，N/n：下一行，L/l：最后一行\n");
+        printf("C: 当前行，X：退出\n请输入具体操作：");
+        scanf("%c", &action);
+        fflush(stdin);
+
+        switch(action)
+        {
+        case 'F':
+        case 'f':
+            EXEC SQL FETCH FIRST sqm_cursor into :inn, :b_stat, :b_peer;
+            break;
+        case 'P':
+        case 'p':
+            EXEC SQL FETCH PRIOR sqm_cursor into :inn, :b_stat, :b_peer;
+            break;
+        case 'N':
+        case 'n':
+            EXEC SQL FETCH NEXT sqm_cursor into :inn, :b_stat, :b_peer;
+            break;
+        case 'L':
+        case 'l':
+            EXEC SQL FETCH LAST sqm_cursor into :inn, :b_stat, :b_peer;
+            break;
+        case 'C':
+        case 'c':
+            EXEC SQL FETCH CURRENT sqm_cursor into :inn, :b_stat, :b_peer;
+            break;
+        case 'X':
+        case 'x':
+            EXEC SQL CLOSE sqm_cursor;
+            return;
+        }
+                printf("测试环境-用sqprod中的表B_PEER_STAT_FLAG做测试\n");
+                printf("----------------------------------------------------------------\n");
+        printf("inn = %s, b_stat = %d, b_peer= %d \n", inn, b_stat,b_peer);
+                printf("----------------------------------------------------------------");
+                printf("\n\n");
+    }
+
+  printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]存放着Select语句作用的行数
+}
+
+编译：
+cc +DD64 001.c -I /home/oracle/db11g/precomp/public/ -L /home/oracle/db11g/lib  -l clntsh
+
+结果：
+
+F/f: 第一行，P/p：前一行，N/n：下一行，L/l：最后一行
+C: 当前行，X：退出
+请输入具体操作：f
+测试环境-用sqprod中的表B_PEER_STAT_FLAG做测试
+----------------------------------------------------------------
+inn = IExtPkAddDo        , b_stat = 1216, b_peer= 0 
+----------------------------------------------------------------
+
+
+F/f: 第一行，P/p：前一行，N/n：下一行，L/l：最后一行
+C: 当前行，X：退出
+请输入具体操作：n
+测试环境-用sqprod中的表B_PEER_STAT_FLAG做测试
+----------------------------------------------------------------
+inn = IExtCardAddDo      , b_stat = 1216, b_peer= 0 
+----------------------------------------------------------------
+
+
+F/f: 第一行，P/p：前一行，N/n：下一行，L/l：最后一行
+C: 当前行，X：退出
+请输入具体操作：p
+测试环境-用sqprod中的表B_PEER_STAT_FLAG做测试
+----------------------------------------------------------------
+inn = IExtPkAddDo        , b_stat = 1216, b_peer= 0 
+----------------------------------------------------------------
+
+
+F/f: 第一行，P/p：前一行，N/n：下一行，L/l：最后一行
+C: 当前行，X：退出
+请输入具体操作：

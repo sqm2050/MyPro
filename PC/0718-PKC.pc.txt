@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sqlca.h>
+char action;
+int connect();
+void cursor();
+void sql_error();
+
+int date1(char date[])  //时间函数 ，把当前日期打印到数组。
+{
+        struct tm *ptr;
+        time_t lt;;
+        lt=time(NULL);
+        ptr=localtime(&lt);
+        strftime(date,100,"%Y%m%d",ptr);
+        return 0;
+}
+
+main()
+{
+   EXEC SQL WHENEVER SQLERROR DO sql_error();
+    if(connect() == 0)
+    {
+        cursor();
+        EXEC SQL COMMIT RELEASE;                // 提交事务，断开连接
+    }
+    else
+        printf("连接失败\n");
+
+}
+
+int connect()                   // connect to Oracle database
+{
+    char username[10], password[10], server[20];
+
+    strcpy(username, "stdcarddb");
+    strcpy(password, "std1db");
+    strcpy(server, "ITANDB.NET2");
+    EXEC SQL CONNECT :username IDENTIFIED BY :password USING :server;
+
+    if(sqlca.sqlcode == 0)
+        return 0;
+    else
+        return sqlca.sqlcode;
+}
+
+void sql_error()                // print error infomation
+{
+    printf("%.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
+}
+void cursor()                   // 游标操作
+{
+/*  char name[20];                  // 定义宿主变量*/
+        EXEC SQL BEGIN DECLARE SECTION;
+        char num[19]; 
+        VARCHAR name[20];
+        EXEC SQL END DECLARE SECTION;
+    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select CARD_NO,CSTM_NAME from t_qry_card_sinfo;    // 定义游标
+    EXEC SQL OPEN sqm_cursor;   // 打开游标
+    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // 游标数据提取完毕后退出循环
+    FILE * fp;
+    char da[100];
+    char fname[100];
+    int i ,j;
+    date1(da);
+    int qq,cc;
+    int n;
+    printf("输入渠道号(两位)：");
+    scanf("%2d",&qq);
+    printf("输入平台号(七位)：");
+    scanf("%7d",&cc);
+    printf("输入要生成的文件数：");
+    scanf("%d",&j);
+    for (i = 1;i<=j;i++)
+    {
+        sprintf(fname,"%02d%07dPKC%s%06d00.i",qq,cc,da,i);
+        fp=fopen(fname,"w+");
+        fprintf(fp,"%02d%07d%s%06d|5|0.00||||\n",qq,cc,da,i);
+        for (n = 1;n<=5;n++)
+        {
+            EXEC SQL FETCH NEXT sqm_cursor into :num, :name;
+                        name.arr[name.len]='\0';
+            fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|丰体宾馆|00|22222222|13888888888|0.00\n",n,name.arr,num);
+        }
+        fclose(fp);
+}
+EXEC SQL CLOSE sqm_cursor;
+//      printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]存放着Select语句作用的行数
+}

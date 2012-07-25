@@ -1,0 +1,20 @@
+logicpost1/home/stdpsbc/priv/sqm/c/test>cat 11.c
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char * c = "hello";
+    printf("%.*s\n", 2, c);
+    printf("%.*s\n", strlen(c), c);
+    return 0;
+}
+logicpost1/home/stdpsbc/priv/sqm/c/test>a.out 
+he
+hello
+logicpost1/home/stdpsbc/priv/sqm/c/test>
+
+其实 还可以"%*.*lf",  
+
+printf("%*.*lf", 5, 2, acos(-1));
+
+//全部长度为5 小数点后面为2位输出acos(-1)(这是啥呢呵呵

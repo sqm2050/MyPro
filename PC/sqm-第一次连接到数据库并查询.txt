@@ -1,0 +1,41 @@
+//‘¥¬Î
+
+#define  EXTERN
+//EXEC SQL include "rpt_pub.h";
+//EXEC SQL include "user_include_file";
+EXEC SQL include sqlca;
+EXEC SQL include oraca;
+#include <stdio.h>
+EXEC SQL BEGIN DECLARE SECTION;
+    VARCHAR username[20];
+    VARCHAR password[20];
+EXEC SQL END DECLARE SECTION;
+
+void sqlerror();
+
+main()
+{
+EXEC SQL BEGIN DECLARE SECTION;
+int num;
+VARCHAR name[20];
+EXEC SQL END DECLARE SECTION;
+
+
+strcpy(username.arr,"rptdevdb");
+username.len=strlen(username.arr);
+strcpy(password.arr,"rptdevdb");
+password.len=strlen(password.arr);
+EXEC SQL CONNECT:username IDENTIFIED BY:password;
+printf("links sucess!\n");
+EXEC SQL SELECT *
+    INTO :num,:name
+    FROM sqm
+    WHERE num=1;
+printf("%d\n%s\n",num,name.arr);
+
+}
+
+//±‡“Î
+proc links.pc
+
+cc link.c -I /home/oracle/app/product/10.2.0/db_1/precomp/public/ -L /home/oracle/app/product/10.2.0/db_1/lib -l clntsh

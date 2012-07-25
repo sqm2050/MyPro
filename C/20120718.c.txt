@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <time.h>
+#define NAME 1000
+
+
+int date1(char date[])  //时间函数 ，把当前日期打印到数组。
+{
+        struct tm *ptr;
+        time_t lt;;
+        lt=time(NULL);
+        ptr=localtime(&lt);
+        strftime(date,100,"%Y%m%d",ptr);
+        return 0;
+}
+
+main()
+{
+        FILE * fp;
+        char da[100];
+        char fname[100];
+        int i ,j;
+        date1(da);
+        int qq,cc;
+        int n;
+        printf("输入渠道号(两位)：");
+        scanf("%2d",&qq);
+        printf("输入平台号(七位)：");
+        scanf("%7d",&cc);
+        printf("输入要生成的文件数：");
+        scanf("%d",&j);
+        for (i = 1;i<=j;i++)
+        {
+                char name[20]="孙清孟";
+                char py[20]="sunqingmeng";
+                sprintf(fname,"%02d%07dPKH%s%06d00.i",qq,cc,da,i);
+                fp=fopen(fname,"w+");
+                fprintf(fp,"%02d%07d%s%06d|5|0.00||||\n",qq,cc,da,i);
+                for (n = 1;n<=5;n++)
+                {
+
+                        fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|丰体宾馆|00|22222222|13888888888|0.00\n",n,name,py);
+                }
+                fclose(fp);
+        }
+}

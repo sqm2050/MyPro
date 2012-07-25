@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <strings.h>
+main()
+{
+char a[]="sqm";
+char *p=a;      //×Ö·û´®Ö¸Õë
+printf("%s\n",a);	//sqm
+printf("%d\n",a);	//2147475216
+printf("%d\n",&a);	//2147475216
+printf("%s\n",*&a); //sqm
+
+printf("%s\n",p);   //sqm
+printf("%d\n",p);   //2147475216
+printf("%d\n",&p);	//2147475220
+printf("%s\n",*p);  //¿Õ
+printf("%d\n",*p);  //115
+printf("============================================\n");
+
+int b=100;
+int *pp=&b;
+printf("%d\n",b);	//100
+printf("%d\n",&b);	//2147475224
+
+printf("%d\n",*pp); //100
+printf("%d\n",pp);  //2147475224
+printf("%d\n",&pp); //2147475228
+}

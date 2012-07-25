@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+EXEC SQL INCLUDE SQLCA;
+EXEC SQL INCLUDE ORACA;
+EXEC SQL BEGIN DECLARE SECTION;
+    varchar uid[20];		//数组未初始化
+    varchar password[20];
+    int date[1000];
+    char prov[1000][3];
+    char inst[1000][10];
+    char name[1000][41];
+    char page[1000][7];
+    char line[1000][7];
+    char paycard[1000][20];
+    char outcard[1000][20];
+    char flag[1000][5];
+    char trl[1000][11];
+    char summ[1000][21];
+EXEC SQL END DECLARE SECTION;
+int main ()
+{
+  int i=0;
+  FILE * fp;
+  strcpy(uid.arr,"rptdevdb");
+  uid.len=strlen(uid.arr);
+  strcpy(password.arr,"rptdevdb");
+  password.len=strlen(password.arr);
+  EXEC SQL CONNECT :uid IDENTIFIED BY :password;
+  printf("successful\n");
+  fp=fopen("sqm.txt","w+");
+  while(i<400)
+  {
+    EXEC SQL SELECT *
+        INTO :date[i],:prov[i],:inst[i],:name[i],:page[i],:line[i],:paycard[i],:outcard[i],:flag[i],:trl[i],:summ[i]
+        FROM t_out_7001_4;
+    printf("%d %s %s %s %s %s %s %s %s %s %s\n",date[i],prov[i],inst[i],name[i],page[i],line[i],paycard[i],outcard[i],flag[i],trl[i],summ[i]);
+    fprintf(fp,"%d %s %s %s %s %s %s %s %s %s %s\n",date[i],prov[i],inst[i],name[i],page[i],line[i],paycard[i],outcard[i],flag[i],trl[i],summ[i]);
+    i++;
+  }
+}
