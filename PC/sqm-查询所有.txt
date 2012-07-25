@@ -1,9 +1,9 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <string.h>
 EXEC SQL INCLUDE SQLCA;
 EXEC SQL INCLUDE ORACA;
 EXEC SQL BEGIN DECLARE SECTION;
-    varchar uid[20];		//Êı×éÎ´³õÊ¼»¯
+    varchar uid[20];		//æ•°ç»„æœªåˆå§‹åŒ–
     varchar password[20];
     int date[1000];
     char prov[1000][3];

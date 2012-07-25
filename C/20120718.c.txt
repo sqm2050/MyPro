@@ -1,9 +1,9 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <time.h>
 #define NAME 1000
 
 
-int date1(char date[])  //Ê±¼äº¯Êı £¬°Ñµ±Ç°ÈÕÆÚ´òÓ¡µ½Êı×é¡£
+int date1(char date[])  //æ—¶é—´å‡½æ•° ï¼ŒæŠŠå½“å‰æ—¥æœŸæ‰“å°åˆ°æ•°ç»„ã€‚
 {
         struct tm *ptr;
         time_t lt;;
@@ -22,15 +22,15 @@ main()
         date1(da);
         int qq,cc;
         int n;
-        printf("ÊäÈëÇşµÀºÅ(Á½Î»)£º");
+        printf("è¾“å…¥æ¸ é“å·(ä¸¤ä½)ï¼š");
         scanf("%2d",&qq);
-        printf("ÊäÈëÆ½Ì¨ºÅ(ÆßÎ»)£º");
+        printf("è¾“å…¥å¹³å°å·(ä¸ƒä½)ï¼š");
         scanf("%7d",&cc);
-        printf("ÊäÈëÒªÉú³ÉµÄÎÄ¼şÊı£º");
+        printf("è¾“å…¥è¦ç”Ÿæˆçš„æ–‡ä»¶æ•°ï¼š");
         scanf("%d",&j);
         for (i = 1;i<=j;i++)
         {
-                char name[20]="ËïÇåÃÏ";
+                char name[20]="å­™æ¸…å­Ÿ";
                 char py[20]="sunqingmeng";
                 sprintf(fname,"%02d%07dPKH%s%06d00.i",qq,cc,da,i);
                 fp=fopen(fname,"w+");
@@ -38,7 +38,7 @@ main()
                 for (n = 1;n<=5;n++)
                 {
 
-                        fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|·áÌå±ö¹İ|00|22222222|13888888888|0.00\n",n,name,py);
+                        fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|ä¸°ä½“å®¾é¦†|00|22222222|13888888888|0.00\n",n,name,py);
                 }
                 fclose(fp);
         }

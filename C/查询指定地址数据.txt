@@ -1,4 +1,4 @@
-char   nameStr[16]; 
+﻿char   nameStr[16]; 
 #define   BASE_ADDR   0x00800000 
   
 nameStr[15]   =    '\0 '; 

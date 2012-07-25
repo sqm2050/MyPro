@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #define DATE_MAX 50
 #define BASE 1990
 main()
@@ -8,8 +8,8 @@ i = 0;
 j = 0;
 struct s_chgdate
 {
-    long    year;           /*Äê·İ*/
-    char    send_mon[6];    /*2ÔÂ×îºóÒ»ÌìµÄÈÕÆÚ*/
+    long    year;           /*å¹´ä»½*/
+    char    send_mon[6];    /*2æœˆæœ€åä¸€å¤©çš„æ—¥æœŸ*/
 };
 struct s_chgdate srleapyear[DATE_MAX];
 for (i=0;i<=DATE_MAX;i++)
@@ -63,7 +63,7 @@ printf("}\n");
 }
 }
 -------------------------------------------------------------
-´òÓ¡½á¹ûÈçÏÂ£º
+æ‰“å°ç»“æœå¦‚ä¸‹ï¼š
 {1990,"0228"}
 {1991,"0228"}
 {1992,"0229"}

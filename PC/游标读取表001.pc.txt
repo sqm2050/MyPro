@@ -1,8 +1,8 @@
-»·¾³£º
-²âÊÔ»·¾³-ÓÃsqprodÖÐµÄ±íB_PEER_STAT_FLAG×ö²âÊÔ
+ï»¿çŽ¯å¢ƒï¼š
+æµ‹è¯•çŽ¯å¢ƒ-ç”¨sqprodä¸­çš„è¡¨B_PEER_STAT_FLAGåšæµ‹è¯•
 
 
-Ô´Âë£º
+æºç ï¼š
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -19,10 +19,10 @@ void main()
     if(connect() == 0)
     {
         cursor();
-        EXEC SQL COMMIT RELEASE;                // Ìá½»ÊÂÎñ£¬¶Ï¿ªÁ¬½Ó
+        EXEC SQL COMMIT RELEASE;                // æäº¤äº‹åŠ¡ï¼Œæ–­å¼€è¿žæŽ¥
     }
     else
-        printf("Á¬½ÓÊ§°Ü\n");
+        printf("è¿žæŽ¥å¤±è´¥\n");
 }
 
 int connect()                   // connect to Oracle database
@@ -44,19 +44,19 @@ void sql_error()                // print error infomation
 {
     printf("%.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
 }
-void cursor()                   // ÓÎ±ê²Ù×÷
+void cursor()                   // æ¸¸æ ‡æ“ä½œ
 {
-    int b_stat,b_peer;                    // ¶¨ÒåËÞÖ÷±äÁ¿
+    int b_stat,b_peer;                    // å®šä¹‰å®¿ä¸»å˜é‡
     char inn[20];
 
-    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select * from t_mng_ext_tranchk;    // ¶¨ÒåÓÎ±ê
-    EXEC SQL OPEN sqm_cursor;   // ´ò¿ªÓÎ±ê
-    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // ÓÎ±êÊý¾ÝÌáÈ¡Íê±ÏºóÍË³öÑ­»·
+    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select * from t_mng_ext_tranchk;    // å®šä¹‰æ¸¸æ ‡
+    EXEC SQL OPEN sqm_cursor;   // æ‰“å¼€æ¸¸æ ‡
+    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // æ¸¸æ ‡æ•°æ®æå–å®Œæ¯•åŽé€€å‡ºå¾ªçŽ¯
     for(; ;)
 //  while(1)
    {
-        printf("\nF/f: µÚÒ»ÐÐ£¬P/p£ºÇ°Ò»ÐÐ£¬N/n£ºÏÂÒ»ÐÐ£¬L/l£º×îºóÒ»ÐÐ\n");
-        printf("C: µ±Ç°ÐÐ£¬X£ºÍË³ö\nÇëÊäÈë¾ßÌå²Ù×÷£º");
+        printf("\nF/f: ç¬¬ä¸€è¡Œï¼ŒP/pï¼šå‰ä¸€è¡Œï¼ŒN/nï¼šä¸‹ä¸€è¡Œï¼ŒL/lï¼šæœ€åŽä¸€è¡Œ\n");
+        printf("C: å½“å‰è¡Œï¼ŒXï¼šé€€å‡º\nè¯·è¾“å…¥å…·ä½“æ“ä½œï¼š");
         scanf("%c", &action);
         fflush(stdin);
 
@@ -87,48 +87,48 @@ void cursor()                   // ÓÎ±ê²Ù×÷
             EXEC SQL CLOSE sqm_cursor;
             return;
         }
-                printf("²âÊÔ»·¾³-ÓÃsqprodÖÐµÄ±íB_PEER_STAT_FLAG×ö²âÊÔ\n");
+                printf("æµ‹è¯•çŽ¯å¢ƒ-ç”¨sqprodä¸­çš„è¡¨B_PEER_STAT_FLAGåšæµ‹è¯•\n");
                 printf("----------------------------------------------------------------\n");
         printf("inn = %s, b_stat = %d, b_peer= %d \n", inn, b_stat,b_peer);
                 printf("----------------------------------------------------------------");
                 printf("\n\n");
     }
 
-  printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]´æ·Å×ÅSelectÓï¾ä×÷ÓÃµÄÐÐÊý
+  printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]å­˜æ”¾ç€Selectè¯­å¥ä½œç”¨çš„è¡Œæ•°
 }
 
-±àÒë£º
+ç¼–è¯‘ï¼š
 cc +DD64 001.c -I /home/oracle/db11g/precomp/public/ -L /home/oracle/db11g/lib  -l clntsh
 
-½á¹û£º
+ç»“æžœï¼š
 
-F/f: µÚÒ»ÐÐ£¬P/p£ºÇ°Ò»ÐÐ£¬N/n£ºÏÂÒ»ÐÐ£¬L/l£º×îºóÒ»ÐÐ
-C: µ±Ç°ÐÐ£¬X£ºÍË³ö
-ÇëÊäÈë¾ßÌå²Ù×÷£ºf
-²âÊÔ»·¾³-ÓÃsqprodÖÐµÄ±íB_PEER_STAT_FLAG×ö²âÊÔ
+F/f: ç¬¬ä¸€è¡Œï¼ŒP/pï¼šå‰ä¸€è¡Œï¼ŒN/nï¼šä¸‹ä¸€è¡Œï¼ŒL/lï¼šæœ€åŽä¸€è¡Œ
+C: å½“å‰è¡Œï¼ŒXï¼šé€€å‡º
+è¯·è¾“å…¥å…·ä½“æ“ä½œï¼šf
+æµ‹è¯•çŽ¯å¢ƒ-ç”¨sqprodä¸­çš„è¡¨B_PEER_STAT_FLAGåšæµ‹è¯•
 ----------------------------------------------------------------
 inn = IExtPkAddDo        , b_stat = 1216, b_peer= 0 
 ----------------------------------------------------------------
 
 
-F/f: µÚÒ»ÐÐ£¬P/p£ºÇ°Ò»ÐÐ£¬N/n£ºÏÂÒ»ÐÐ£¬L/l£º×îºóÒ»ÐÐ
-C: µ±Ç°ÐÐ£¬X£ºÍË³ö
-ÇëÊäÈë¾ßÌå²Ù×÷£ºn
-²âÊÔ»·¾³-ÓÃsqprodÖÐµÄ±íB_PEER_STAT_FLAG×ö²âÊÔ
+F/f: ç¬¬ä¸€è¡Œï¼ŒP/pï¼šå‰ä¸€è¡Œï¼ŒN/nï¼šä¸‹ä¸€è¡Œï¼ŒL/lï¼šæœ€åŽä¸€è¡Œ
+C: å½“å‰è¡Œï¼ŒXï¼šé€€å‡º
+è¯·è¾“å…¥å…·ä½“æ“ä½œï¼šn
+æµ‹è¯•çŽ¯å¢ƒ-ç”¨sqprodä¸­çš„è¡¨B_PEER_STAT_FLAGåšæµ‹è¯•
 ----------------------------------------------------------------
 inn = IExtCardAddDo      , b_stat = 1216, b_peer= 0 
 ----------------------------------------------------------------
 
 
-F/f: µÚÒ»ÐÐ£¬P/p£ºÇ°Ò»ÐÐ£¬N/n£ºÏÂÒ»ÐÐ£¬L/l£º×îºóÒ»ÐÐ
-C: µ±Ç°ÐÐ£¬X£ºÍË³ö
-ÇëÊäÈë¾ßÌå²Ù×÷£ºp
-²âÊÔ»·¾³-ÓÃsqprodÖÐµÄ±íB_PEER_STAT_FLAG×ö²âÊÔ
+F/f: ç¬¬ä¸€è¡Œï¼ŒP/pï¼šå‰ä¸€è¡Œï¼ŒN/nï¼šä¸‹ä¸€è¡Œï¼ŒL/lï¼šæœ€åŽä¸€è¡Œ
+C: å½“å‰è¡Œï¼ŒXï¼šé€€å‡º
+è¯·è¾“å…¥å…·ä½“æ“ä½œï¼šp
+æµ‹è¯•çŽ¯å¢ƒ-ç”¨sqprodä¸­çš„è¡¨B_PEER_STAT_FLAGåšæµ‹è¯•
 ----------------------------------------------------------------
 inn = IExtPkAddDo        , b_stat = 1216, b_peer= 0 
 ----------------------------------------------------------------
 
 
-F/f: µÚÒ»ÐÐ£¬P/p£ºÇ°Ò»ÐÐ£¬N/n£ºÏÂÒ»ÐÐ£¬L/l£º×îºóÒ»ÐÐ
-C: µ±Ç°ÐÐ£¬X£ºÍË³ö
-ÇëÊäÈë¾ßÌå²Ù×÷£º
+F/f: ç¬¬ä¸€è¡Œï¼ŒP/pï¼šå‰ä¸€è¡Œï¼ŒN/nï¼šä¸‹ä¸€è¡Œï¼ŒL/lï¼šæœ€åŽä¸€è¡Œ
+C: å½“å‰è¡Œï¼ŒXï¼šé€€å‡º
+è¯·è¾“å…¥å…·ä½“æ“ä½œï¼š

@@ -1,10 +1,10 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <string.h>
 #include <strings.h>
 main()
 {
 char a[]="sqm";
-char *p=a;      //×Ö·û´®Ö¸Õë
+char *p=a;      //å­—ç¬¦ä¸²æŒ‡é’ˆ
 printf("%s\n",a);	//sqm
 printf("%d\n",a);	//2147475216
 printf("%d\n",&a);	//2147475216
@@ -13,7 +13,7 @@ printf("%s\n",*&a); //sqm
 printf("%s\n",p);   //sqm
 printf("%d\n",p);   //2147475216
 printf("%d\n",&p);	//2147475220
-printf("%s\n",*p);  //¿Õ
+printf("%s\n",*p);  //ç©º
 printf("%d\n",*p);  //115
 printf("============================================\n");
 

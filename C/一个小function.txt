@@ -1,17 +1,17 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 
 void f1(long year)
 {
     if (year%100==0)
         if(year%400==0)
-        printf("%ldÊÇÈòÄê\n",year);
+        printf("%ldæ˜¯é—°å¹´\n",year);
         else
-        printf("%ld²»ÊÇÈòÄê\n",year);
+        printf("%ldä¸æ˜¯é—°å¹´\n",year);
     else
     if (year%4==0)
-        printf("%ldÊÇÈòÄê\n",year);
+        printf("%ldæ˜¯é—°å¹´\n",year);
         else
-        printf("%ld²»ÊÇÈòÄê\n",year);
+        printf("%ldä¸æ˜¯é—°å¹´\n",year);
 }
 main()
 {

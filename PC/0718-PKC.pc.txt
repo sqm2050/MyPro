@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +9,7 @@ int connect();
 void cursor();
 void sql_error();
 
-int date1(char date[])  //Ê±¼äº¯Êı £¬°Ñµ±Ç°ÈÕÆÚ´òÓ¡µ½Êı×é¡£
+int date1(char date[])  //æ—¶é—´å‡½æ•° ï¼ŒæŠŠå½“å‰æ—¥æœŸæ‰“å°åˆ°æ•°ç»„ã€‚
 {
         struct tm *ptr;
         time_t lt;;
@@ -25,10 +25,10 @@ main()
     if(connect() == 0)
     {
         cursor();
-        EXEC SQL COMMIT RELEASE;                // Ìá½»ÊÂÎñ£¬¶Ï¿ªÁ¬½Ó
+        EXEC SQL COMMIT RELEASE;                // æäº¤äº‹åŠ¡ï¼Œæ–­å¼€è¿æ¥
     }
     else
-        printf("Á¬½ÓÊ§°Ü\n");
+        printf("è¿æ¥å¤±è´¥\n");
 
 }
 
@@ -51,16 +51,16 @@ void sql_error()                // print error infomation
 {
     printf("%.*s\n", sqlca.sqlerrm.sqlerrml, sqlca.sqlerrm.sqlerrmc);
 }
-void cursor()                   // ÓÎ±ê²Ù×÷
+void cursor()                   // æ¸¸æ ‡æ“ä½œ
 {
-/*  char name[20];                  // ¶¨ÒåËŞÖ÷±äÁ¿*/
+/*  char name[20];                  // å®šä¹‰å®¿ä¸»å˜é‡*/
         EXEC SQL BEGIN DECLARE SECTION;
         char num[19]; 
         VARCHAR name[20];
         EXEC SQL END DECLARE SECTION;
-    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select CARD_NO,CSTM_NAME from t_qry_card_sinfo;    // ¶¨ÒåÓÎ±ê
-    EXEC SQL OPEN sqm_cursor;   // ´ò¿ªÓÎ±ê
-    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // ÓÎ±êÊı¾İÌáÈ¡Íê±ÏºóÍË³öÑ­»·
+    EXEC SQL DECLARE sqm_cursor SCROLL CURSOR FOR Select CARD_NO,CSTM_NAME from t_qry_card_sinfo;    // å®šä¹‰æ¸¸æ ‡
+    EXEC SQL OPEN sqm_cursor;   // æ‰“å¼€æ¸¸æ ‡
+    EXEC SQL WHENEVER NOT FOUND DO BREAK;   // æ¸¸æ ‡æ•°æ®æå–å®Œæ¯•åé€€å‡ºå¾ªç¯
     FILE * fp;
     char da[100];
     char fname[100];
@@ -68,11 +68,11 @@ void cursor()                   // ÓÎ±ê²Ù×÷
     date1(da);
     int qq,cc;
     int n;
-    printf("ÊäÈëÇşµÀºÅ(Á½Î»)£º");
+    printf("è¾“å…¥æ¸ é“å·(ä¸¤ä½)ï¼š");
     scanf("%2d",&qq);
-    printf("ÊäÈëÆ½Ì¨ºÅ(ÆßÎ»)£º");
+    printf("è¾“å…¥å¹³å°å·(ä¸ƒä½)ï¼š");
     scanf("%7d",&cc);
-    printf("ÊäÈëÒªÉú³ÉµÄÎÄ¼şÊı£º");
+    printf("è¾“å…¥è¦ç”Ÿæˆçš„æ–‡ä»¶æ•°ï¼š");
     scanf("%d",&j);
     for (i = 1;i<=j;i++)
     {
@@ -83,10 +83,10 @@ void cursor()                   // ÓÎ±ê²Ù×÷
         {
             EXEC SQL FETCH NEXT sqm_cursor into :num, :name;
                         name.arr[name.len]='\0';
-            fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|·áÌå±ö¹İ|00|22222222|13888888888|0.00\n",n,name.arr,num);
+            fprintf(fp,"%d|%s|%s|0.00|10|4321765890123|420000|20220228|0|2222|ä¸°ä½“å®¾é¦†|00|22222222|13888888888|0.00\n",n,name.arr,num);
         }
         fclose(fp);
 }
 EXEC SQL CLOSE sqm_cursor;
-//      printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]´æ·Å×ÅSelectÓï¾ä×÷ÓÃµÄĞĞÊı
+//      printf("sqlca.sqlerrd[2] = %d\n", sqlca.sqlerrd[2]);        // sqlca.sqlerrd[2]å­˜æ”¾ç€Selectè¯­å¥ä½œç”¨çš„è¡Œæ•°
 }

@@ -1,4 +1,4 @@
-logicpost1/home/stdpsbc/priv/sqm/c/test>cat 11.c
+﻿logicpost1/home/stdpsbc/priv/sqm/c/test>cat 11.c
 #include <stdio.h>
 #include <string.h>
 int main()
@@ -13,8 +13,8 @@ he
 hello
 logicpost1/home/stdpsbc/priv/sqm/c/test>
 
-��ʵ ������"%*.*lf",  
+其实 还可以"%*.*lf",  
 
 printf("%*.*lf", 5, 2, acos(-1));
 
-//ȫ������Ϊ5 С�������Ϊ2λ���acos(-1)(����ɶ�غǺ�
+//全部长度为5 小数点后面为2位输出acos(-1)(这是啥呢呵呵
